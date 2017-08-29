@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700');
+@import "../global.less";
+
+body, html {
+  font-family: 'Source Sans Pro', sans-serif;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: @white;
+  .view-container {
+    min-height: calc(~"100vh" - @header-height);
+  }
+}
+
+
+img {
+  text-align: center;
+  line-height: 80px;
+  vertical-align: middle;
+  
+}

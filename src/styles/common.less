@@ -1,0 +1,46 @@
+
+.view-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
+.view {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-self: center;
+    background: whitesmoke;
+}
+
+
+.list-item-hover {
+    position: relative;
+    transition: .3s ease;
+    content: '';
+    & > * {
+        z-index: 2;
+    }
+    
+    &::after {
+        transition: .3s ease;
+        transition-delay: .2s;        
+        z-index: 1;
+        content: '';        
+        width: 0px;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        &::after {
+            width: 100%;
+            background: darken(whitesmoke, 10%);
+        }
+    }
+}

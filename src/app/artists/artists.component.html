@@ -1,0 +1,27 @@
+
+<div class="view-container">
+    <div class="view col-xs-12 col-md-8">
+        <div class="search">
+            <h1 class="main-text">Artists</h1>
+            <p>You are currently searching "{{searched}}" </p>   
+        
+            <input 
+                type="text" 
+                [(ngModel)]="searchText" 
+                (keyup.enter)="searchArtist()"
+                placeholder="Type the name of your favourite artist"
+                >
+        </div>  
+        <hr class="separator">
+        <ul class="artists-list">
+            <li 
+                *ngFor="let artist of artists"
+                 class="artist"
+                 (click)="goToAlbums(artist.id)">
+
+                <img [src]="artist.images[0]?.url" class="logo" alt="No Image">
+                <p class="name">{{artist.name}}</p>
+            </li>
+        </ul>
+    </div>
+</div>               

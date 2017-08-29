@@ -1,0 +1,31 @@
+<div class="view-container">
+    <div class="view col-xs-12 col-md-8">
+        <div class="albums-header" *ngIf="!!artist">
+            <img 
+                src="{{artist?.images[0]?.url}}" 
+                alt="No Image" 
+                class="logo">
+            <div class="text">
+                <h1 class="name">
+                    {{artist.name}}
+                </h1>
+                <p class="genre">
+                    {{artist?.genres[0] | capitalize}}
+                </p>
+            </div>  
+        </div>
+
+        <div class="content">
+            <ul class="albums-list">
+                <li 
+                    *ngFor="let album of albums"
+                    class="album"
+                    (click)="goToAlbum(album.id)">
+    
+                    <img [src]="album.images[0]?.url" class="logo" alt="No Image">
+                    <p class="name">{{album.name}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
