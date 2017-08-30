@@ -16,7 +16,7 @@
 }
 
 
-.list-item-hover {
+.list-item-hover(@scale: 1.05) {
     position: relative;
     transition: .3s ease;
     content: '';
@@ -37,10 +37,10 @@
 
     &:hover {
         cursor: pointer;
-        transform: scale(1.05);
+        transform: scale(@scale);
         &::after {
             width: 100%;
-            background: darken(whitesmoke, 10%);
+            background: darken(whitesmoke, 5%);
         }
     }
 }

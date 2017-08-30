@@ -1,1 +1,83 @@
 @import "../../global.less";
+
+
+.view {
+    padding: 0px;
+}
+
+.album-header {
+    height: 250px;
+    display: flex;
+    border-bottom: 1px solid white;
+    .logo {
+        flex: 1;
+        width: 50%;
+    }
+    .text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px;
+
+        .name {
+            margin: 0px;
+            margin-bottom: 30px;
+        }
+
+        .genre {
+            font-weight: 600;
+            padding-left: 10px;
+        }
+
+    }
+}
+
+.content {
+    padding: 20px 15px;
+    .tracks-list {    
+        display: flex;
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        flex-direction: column;
+        margin: 15px 0px;
+
+        .cd {
+            font-weight: 600;
+            padding: 7px 10px;
+            margin: 0px -15px;
+            margin-bottom: 10px;
+            border-top: 1px solid @complementary;
+            border-bottom: 1px solid @complementary;
+        }
+    }
+    .track {
+        display: flex; 
+        padding: 10px 5px;
+        margin: 0px 5px;
+        align-items: center;
+        text-align: center;
+        transition: .3s ease;
+        justify-content: space-between;
+        &:hover {
+            background: darken(whitesmoke, 5%);
+            transform: scale(1.07);
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        i {
+            cursor: pointer;
+            color: @yellow;
+            padding-right: 7px;
+            font-size: 20px;
+            transition: .3s ease;
+
+            &:hover {
+                font-weight: 800;
+                transform: scale(1.05);
+            }
+        }
+        
+    }
+}

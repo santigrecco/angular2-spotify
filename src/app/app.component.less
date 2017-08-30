@@ -16,7 +16,8 @@ body, html {
   min-height: 100vh;
   background: @white;
   .view-container {
-    min-height: calc(~"100vh" - @header-height);
+    //20px for margin height
+    min-height: calc(~"100vh" - @header-height +20px);
   }
 }
 

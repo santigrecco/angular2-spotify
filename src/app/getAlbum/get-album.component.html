@@ -1,0 +1,51 @@
+<div class="view-container">
+    <div class="view col-xs-12 col-md-8">
+        <div class="album-header" *ngIf="!!album">
+            <img 
+                src="{{album?.images[0]?.url}}" 
+                alt="No Image" 
+                class="logo">
+
+            <div class="text">
+                <h1 class="name">{{album?.name}}</h1>
+            </div>  
+        </div>
+        <div class="content">
+            <div *ngIf="disks.length > 1">
+                <ul 
+                    class="tracks-list"
+                    *ngFor="let disk of disks, let i = index">
+                    <span class="cd"> CD {{i + 1}} </span>
+                    <li 
+                        *ngFor="let track of tracksOfDisk(i + 1)"
+                        class="track">
+                        <p>{{track.name}}</p>
+                        <div class="track-buttons">
+                            <i 
+                                [ngClass]="{'glyphicon': true, 'glyphicon-star': isFav(track.id), 'glyphicon-star-empty': !isFav(track.id)}"
+                                (click)="favourite(track)">
+                            </i> 
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="disks.length === 1">
+                <ul 
+                    class="tracks-list">
+                    <li 
+                        *ngFor="let track of tracks"
+                        class="track">
+                        <p>{{track.name}}</p>
+                        <div class="track-buttons">
+                                <i 
+                                    [ngClass]="{'glyphicon': true, 'glyphicon-star': isFav(track.id), 'glyphicon-star-empty': !isFav(track.id)}"
+                                    (click)="favourite(track)">
+                                </i>   
+                            </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

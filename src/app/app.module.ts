@@ -21,6 +21,7 @@ import { AppGuard } from './app.guard';
 
 import { ArtistsService } from './artists/artists.service';
 import { AlbumsService } from './albums/albums.service';
+import { GetAlbumService } from './getAlbum/get-album.service';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { AlbumsService } from './albums/albums.service';
     AuthService,
     ArtistsService,
     AlbumsService,
+    GetAlbumService,
     AppResolver,
     {
       provide: Http,
