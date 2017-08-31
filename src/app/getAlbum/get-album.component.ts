@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetAlbumService } from './get-album.service';
 
@@ -18,7 +18,8 @@ export class GetAlbumComponent {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public getAlbumService: GetAlbumService
+    public getAlbumService: GetAlbumService,
+    @Inject('PreviewService') public previewService: any
   ) {}
 
   ngOnInit() {
@@ -49,6 +50,7 @@ export class GetAlbumComponent {
       .subscribe(
         (response: any) => {
           this.tracks = response.items
+          this.tracks.forEach((el: any) => console.log(el.preview_url))
         });
   }
 
@@ -84,5 +86,26 @@ export class GetAlbumComponent {
     }
 
     localStorage.setItem('favs', JSON.stringify(this.favs));
+  }
+
+
+  havePreview(track: any) {
+    return !!track.preview_url;
+  }
+
+  playPause(track: any) {
+    if(!this.havePreview(track))
+        return
+
+    if(this.previewService.isSettedTrack(track)) {
+      this.previewService.isPlaying() ? this.previewService.pause(track) : 
+      this.previewService.play(track);
+    } else {
+      this.previewService.play(track);
+    }
+  }
+
+  isPlaying(track: any) {
+    return this.previewService.isSettedTrack(track) && this.previewService.isPlaying();
   }
 }

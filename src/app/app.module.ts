@@ -22,6 +22,7 @@ import { AppGuard } from './app.guard';
 import { ArtistsService } from './artists/artists.service';
 import { AlbumsService } from './albums/albums.service';
 import { GetAlbumService } from './getAlbum/get-album.service';
+import { PreviewService } from './common/preview.service';
 
 @NgModule({
   imports: [
@@ -47,6 +48,10 @@ import { GetAlbumService } from './getAlbum/get-album.service';
       provide: Http,
       useFactory: InterceptedHttpFactory,
       deps: [XHRBackend, RequestOptions, AuthService]
+    },
+    {
+      provide: 'PreviewService',
+      useClass: PreviewService
     },
     AppGuard
   ],

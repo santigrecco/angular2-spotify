@@ -25,6 +25,12 @@
                                 [ngClass]="{'glyphicon': true, 'glyphicon-star': isFav(track.id), 'glyphicon-star-empty': !isFav(track.id)}"
                                 (click)="favourite(track)">
                             </i> 
+
+                            <i 
+                                class="glyphicon play"
+                                [ngClass]="{'glyphicon-play': true, 'disabled': !havePreview(track)}">
+
+                            </i>
                         </div>
                     </li>
                 </ul>
@@ -41,6 +47,14 @@
                                     [ngClass]="{'glyphicon': true, 'glyphicon-star': isFav(track.id), 'glyphicon-star-empty': !isFav(track.id)}"
                                     (click)="favourite(track)">
                                 </i>   
+
+                                <i 
+                                    class="glyphicon play"
+                                    [ngClass]="{'glyphicon-play': !isPlaying(track), 'glyphicon-pause': isPlaying(track),  'disabled': !havePreview(track)}"
+                                    (click)="playPause(track)"
+                                >
+
+                                </i>
                             </div>
                     </li>
                 </ul>
