@@ -1,5 +1,5 @@
 <div class="view-container">
-    <div class="view col-xs-12 col-md-8">
+    <div class="view view-no-padding col-xs-12 col-md-8">
         <div class="album-header" *ngIf="!!album">
             <img 
                 src="{{album?.images[0]?.url}}" 
@@ -8,16 +8,45 @@
 
             <div class="text">
                 <h1 class="name">{{album?.name}}</h1>
+
+                
+                <div class="artists">
+                    <span *ngFor="let artist of album.artists; let isLast = last">
+                        {{artist.name}} {{isLast ? ' ': '/'}}
+                    </span>    
+                </div>
+                <p *ngIf="album?.release_date" class="release-date">
+                    {{album?.release_date | date: 'MM/dd/yyyy'}}
+                </p>
             </div>  
         </div>
         <div class="content">
+            <div class="tracks-title">
+                <h2>Tracks</h2>
+                <div class="sorting">
+                    <div class="sortingBy">
+                        <p>Sort by:</p>
+                        <button class="btn" 
+                            [disabled]="sortTrackNumberIsActive"
+                            (click)="toggleSortBy()">
+                            Default
+                        </button>
+                        <button class="btn" 
+                            [disabled]="sortDurationIsActive"
+                            (click)="toggleSortBy()">
+                            Duration
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div *ngIf="disks.length > 1">
                 <ul 
                     class="tracks-list"
                     *ngFor="let disk of disks, let i = index">
                     <span class="cd"> CD {{i + 1}} </span>
                     <li 
-                        *ngFor="let track of tracksOfDisk(i + 1)"
+                        *ngFor="let track of tracksOfDisk(i + 1)  | sort: sortBy: sortOrder"
                         class="track">
                         <p>{{track.name}}</p>
                         <div class="track-buttons">
@@ -39,7 +68,7 @@
                 <ul 
                     class="tracks-list">
                     <li 
-                        *ngFor="let track of tracks"
+                        *ngFor="let track of tracks | sort: sortBy: sortOrder"
                         class="track">
                         <p>{{track.name}}</p>
                         <div class="track-buttons">
@@ -58,6 +87,10 @@
                             </div>
                     </li>
                 </ul>
+            </div>
+
+            <div class="loading-container" *ngIf="isLoading">
+                <div class="loading"></div>
             </div>
         </div>
 

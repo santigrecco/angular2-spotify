@@ -7,6 +7,7 @@
         
             <input 
                 type="text" 
+                class="regular-input"
                 [(ngModel)]="searchText" 
                 (keyup.enter)="searchArtist()"
                 placeholder="Type the name of your favourite artist"
@@ -23,5 +24,10 @@
                 <p class="name">{{artist.name}}</p>
             </li>
         </ul>
+
+
+        <div class="loading-container" *ngIf="isLoading">
+            <div class="loading"></div>
+        </div>
     </div>
 </div>               

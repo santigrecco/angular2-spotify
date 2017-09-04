@@ -1,23 +1,25 @@
 @import "../../global.less";
 
 
-.view {
-    padding: 0px;
+.view-no-padding {
+    padding: 0px;    
 }
 
 .album-header {
-    height: 250px;
+    min-height: 250px;
     display: flex;
-    border-bottom: 1px solid white;
+    border-bottom: 20px solid @white;
     .logo {
         flex: 1;
         width: 50%;
+        height: 250px;
     }
     .text {
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 10px 20px;
+        padding: 20px;
+        justify-content: space-around;
 
         .name {
             margin: 0px;
@@ -29,11 +31,58 @@
             padding-left: 10px;
         }
 
+        .artists {
+            display: flex;
+            flex-direction: row;
+            font-weight: 600;
+        }
+        .release-date {
+            font-weight: 600;
+        }
+
     }
 }
 
 .content {
     padding: 20px 15px;
+
+    .tracks-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .sorting {
+            display: flex;
+            align-items: flex-end;
+            p{
+                padding: 6px 0px;
+                margin: 0px;
+                vertical-align: middle;
+                display: inline-block;
+            }
+            .btn{
+                border: 0px;
+                background: transparent;
+                outline: none;
+                color: @complementary;
+                font-weight: 600;
+                &:hover {
+                    border: 0px;
+                    background: transparent;
+                }
+                &:active {
+                    border: 0px;
+                    box-shadow: none;
+                    background: transparent;
+                }
+                &:disabled {
+                    color: grey;
+                    cursor: default;
+                }
+            }
+        }
+    }
+
     .tracks-list {    
         display: flex;
         list-style: none;
@@ -47,8 +96,8 @@
             padding: 7px 10px;
             margin: 0px -15px;
             margin-bottom: 10px;
-            border-top: 1px solid @complementary;
-            border-bottom: 1px solid @complementary;
+            background: @complementary;
+            color: white;
         }
     }
     .track {
@@ -61,33 +110,40 @@
         justify-content: space-between;
         &:hover {
             background: darken(whitesmoke, 5%);
-            transform: scale(1.07);
+            transform: scale(1.05);
             font-weight: 600;
             border-radius: 2px;
         }
 
-        i {
-            cursor: pointer;
-            color: @yellow;
-            padding-right: 7px;
-            font-size: 20px;
-            transition: .3s ease;
-
-            &:hover {
-                font-weight: 800;
-                transform: scale(1.05);
+        .track-buttons {
+            display: flex;
+            margin-left: 5px;
+            i {
+                cursor: pointer;
+                color: @yellow;
+                padding-right: 7px;
+                font-size: 20px;
+                transition: .3s ease;
+    
+                &:hover {
+                    font-weight: 800;
+                    transform: scale(1.05);
+                }
+    
+                &.play {
+                    color: @green;
+                    margin-left: 10px;
+                }
+    
+                &.disabled {
+                    color: darkgrey !important;
+                    cursor: not-allowed !important;
+                }
             }
-
-            &.play {
-                color: @green;
-                margin-left: 10px;
-            }
-
-            &.disabled {
-                color: darkgrey !important;
-                cursor: not-allowed !important;
+            
+            p {
+                margin: 0px;
             }
         }
-        
     }
 }

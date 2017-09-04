@@ -1,3 +1,5 @@
+@import "./variables.less";
+
 
 .view-container {
     display: flex;
@@ -44,3 +46,45 @@
         }
     }
 }
+
+.regular-input {
+    margin: 40px 0px;
+    border-radius: 3px;
+    border: 1px solid @complementary;
+    text-indent: 5px;
+}
+
+.loading-container {
+    width: 100%;
+    padding: 30px;
+    .loading {
+        margin: 0px auto;
+        height: 120px;
+        width: 120px;
+        background: transparent;
+        border-radius: 50%;
+        border: 16px solid transparent;
+        border-top: 16px solid @complementary;
+        animation: .7s loading linear infinite;
+    }
+}
+
+ @keyframes loading {
+     0% {
+        
+        transform: rotate(0deg);
+        border-top-color: @complementary;
+     }
+
+     50% {
+        
+        transform: rotate(180deg);
+        border-top-color: transparent;
+     }
+
+     100% {
+        
+        transform: rotate(360deg);
+        border-top-color: @complementary;
+     }
+ }

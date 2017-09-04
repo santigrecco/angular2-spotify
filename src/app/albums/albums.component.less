@@ -6,12 +6,13 @@
 }
 
 .albums-header {
-    height: 250px;
+    min-height: 250px;
     display: flex;
-    border-bottom: 1px solid white;
+
     .logo {
         flex: 1;
         width: 50%;
+        height: 250px;
     }
     .text {
         flex: 1;
@@ -31,6 +32,14 @@
         }
 
     }
+}
+
+.separator-white {
+    border: 0px;
+    height: 20px;
+    background: @white;
+    margin-top: 0px;
+    width: 100%;
 }
 
 .content {

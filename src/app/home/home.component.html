@@ -7,11 +7,34 @@
     
         <input 
             type="text" 
+            class="regular-input"
             [(ngModel)]="searchText" 
             (keyup.enter)="searchArtist()"
             placeholder="Type the name of your favourite artist"
             >
 
-        <div class="favourites" *ngIf="areFavourites"></div>
+        <div class="favourites" *ngIf="areFavourites">
+            <h2>Favourite Songs</h2>
+            <ul class="favs-list">
+                    <li 
+                        *ngFor="let fav of favourites, let i = index"
+                         class="fav"
+                         (click)="goToAlbum(fav)"
+                         >
+        
+                        <img [src]="fav.albumImage[0]?.url" class="logo" alt="No Image">
+                        <div class="text">
+                            <p class="name">{{fav.name}}</p>
+                            <div class="artists">
+                                <span *ngFor="let favArtist of fav.artists;let isLast=last">
+                                    {{favArtist.name}} {{isLast ? ' ' : ' / '}}  
+                                </span>
+                            </div>
+                        </div>
+                        <i class="glyphicon glyphicon-remove remove" (click)="removeFav($event, i)"></i>
+                    </li>
+                </ul>
+
+        </div>
     </div>
 </div>

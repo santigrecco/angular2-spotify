@@ -2,18 +2,20 @@ import { Component, ViewEncapsulation, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetAlbumService } from './get-album.service';
 
+
 @Component({
-  encapsulation: ViewEncapsulation.None,
   selector: 'get-album',
   templateUrl: './get-album.component.html',
-  styleUrls: ['./get-album.component.less']
+  styleUrls: ['./get-album.component.less', './get-album.component.medium.less' ]
 })
 export class GetAlbumComponent {
   public params: any;
   public album: any;
   public tracks: any;
   public favs: Array<any> = [];
-
+  public sortStates: Array<string> = ['track_number', 'duration_ms']
+  public sortBy: string = 'track_number';
+  public isLoading: Boolean = true; 
 
   constructor(
     public route: ActivatedRoute,
@@ -27,31 +29,29 @@ export class GetAlbumComponent {
       params => {
         this.params = params;
         this.getAlbum(params.id);
-        this.getAlbumTracks(params.id);
+        // this.getAlbumTracks(params.id);
       }
     )
-
     let storagedFavs = localStorage.getItem('favs');
     if(storagedFavs) {
       this.favs = JSON.parse(storagedFavs);
     }
   }
 
+
   getAlbum(id: string) {
     this.getAlbumService.getAlbum(id)
       .subscribe(
         (response: any) => {
-          this.album = response
-        });
-  }
-
-  getAlbumTracks(id: string) {
-    this.getAlbumService.getAlbumTracks(id)
-      .subscribe(
-        (response: any) => {
-          this.tracks = response.items
-          this.tracks.forEach((el: any) => console.log(el.preview_url))
-        });
+          this.album = response;
+          this.tracks = response.tracks.items;
+          this.album.release_date = response.release_date ? new Date(response.release_date) : null;
+        },  
+        ()=>{},
+        ()=>{
+          this.isLoading = false;
+        }
+      );
   }
 
   get disks(): Array<any> {
@@ -82,7 +82,14 @@ export class GetAlbumComponent {
     if(index != -1) {
       this.favs.splice(index, 1);
     } else {
-      this.favs.push(track);
+      let makeObj = {
+        id: track.id,
+        artists: track.artists,
+        name: track.name,
+        albumId: this.album.id,
+        albumImage: this.album.images
+      }
+      this.favs.push(makeObj);
     }
 
     localStorage.setItem('favs', JSON.stringify(this.favs));
@@ -108,4 +115,32 @@ export class GetAlbumComponent {
   isPlaying(track: any) {
     return this.previewService.isSettedTrack(track) && this.previewService.isPlaying();
   }
+
+
+  toggleSortBy() {
+    switch (this.sortBy) {
+      case this.sortStates[0]: {
+        this.sortBy = this.sortStates[1];
+        break;
+      }
+
+      case this.sortStates[1]: {
+        this.sortBy = this.sortStates[0];
+        break;
+      }
+    }
+  }
+
+  get sortTrackNumberIsActive() {
+    return this.sortStates[0] === this.sortBy;
+  }
+
+  get sortDurationIsActive() {
+    return this.sortStates[1] === this.sortBy;
+  }
+  
+  get sortOrder() {
+    return this.sortTrackNumberIsActive ? 'smaller' : 'bigger'
+  }
+
 }

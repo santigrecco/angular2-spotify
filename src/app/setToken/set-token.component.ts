@@ -11,14 +11,16 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class SetTokenComponent implements OnInit {
 
 
-  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.activatedRoute.fragment.subscribe((fragment: string) => {
 
+
+    this.route.fragment.subscribe((fragment: string) => {
       let fragments = fragment.split('&');
-
-      this.authService.setToken(fragments[0].split('=')[1]);
+      let token = fragments[0].split('=')[1];
+      let expires_in = fragments[2].split('=')[1]
+      this.authService.setToken(token, expires_in);
 
       setTimeout(() => this.router.navigate(["/home"]));
     });

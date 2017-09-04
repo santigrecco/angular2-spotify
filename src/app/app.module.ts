@@ -15,6 +15,7 @@ import { CapitalizePipe } from './pipes/capitalize';
 import { Http, ConnectionBackend } from '@angular/http';
 import { InterceptedHttp } from './common/interceptedHttp';
 import { InterceptedHttpFactory } from './common/interceptedHttpFactory';
+import { SortPipe } from './common/sortPipe';
 import { AppGuard } from './app.guard';
 
 //services
@@ -36,7 +37,7 @@ import { PreviewService } from './common/preview.service';
     AppComponent,
     routedComponents,
     HeaderComponent,
-    CapitalizePipe
+    SortPipe
   ],
   providers: [
     AuthService,

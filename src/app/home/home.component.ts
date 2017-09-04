@@ -12,9 +12,12 @@ import { Http } from '@angular/http';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent {
+  public favourites: any;
+
 
   get areFavourites(): boolean {
-    return false;
+    
+    return !!this.favourites;
   }
 
   public searchText: string = '';
@@ -24,7 +27,22 @@ export class HomeComponent {
     public router: Router
   ) {}
 
+  ngOnInit() {
+    if(localStorage.getItem('favs'))
+      this.favourites = JSON.parse(localStorage.getItem('favs'));
+  }
+
   searchArtist() {
     this.router.navigate(['artists', this.searchText])
+  }
+
+  goToAlbum(fav: any) {
+    this.router.navigate(['get-album', fav.albumId])
+  }
+
+  removeFav(event: any, index:number) {
+    event.stopPropagation();
+    this.favourites.splice(index, 1);
+    localStorage.setItem('favs', JSON.stringify(this.favourites));
   }
 }

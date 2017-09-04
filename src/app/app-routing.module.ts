@@ -49,7 +49,10 @@ const routes: Routes = [
     resolve:  {
       appResolver: AppResolver
     },
-    canActivate: [AppGuard]
+    canActivate: [AppGuard],
+    data: {
+      name: 'Artists'
+    }
   }
 ];
 

@@ -1,4 +1,25 @@
 
 <header class="header">
-    
+    <div 
+        class="logo"
+        [class.noInput]="!showInput"
+        [routerLink]="'/'">
+        <p class="text">
+            SpotySearch
+        </p>
+    </div>
+    <div *ngIf="showInput" class="show-input">
+        <i class="glyphicon glyphicon-search search" (click)="toggleSearch(searchbarHeader)"></i>        
+        <input 
+            type="text" 
+            [(ngModel)]="searchText" 
+            (keyup.enter)="searchArtist()"
+            placeholder="Search"
+            class="header-input"
+            [class.search-open]="searchOpen"
+            (blur)="closeSearchBar()"
+            #searchbarHeader
+            >
+    </div>
+
 </header>

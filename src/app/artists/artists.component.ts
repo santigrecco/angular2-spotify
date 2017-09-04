@@ -12,6 +12,7 @@ export class ArtistsComponent {
   public artists: Array<any>;
   public searched: string;
   public searchText: string = '';
+  public isLoading: Boolean = true;
 
 
   constructor(
@@ -35,6 +36,7 @@ export class ArtistsComponent {
       .subscribe(
         response => {
           this.artists = response.artists.items;
+          this.isLoading = false;
         }
       )
   }

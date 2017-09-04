@@ -15,3 +15,6 @@ import 'rxjs';
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import 'bootstrap-toggle';
+import 'bootstrap-toggle/css/bootstrap-toggle.min.css';
