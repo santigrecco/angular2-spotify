@@ -24,6 +24,7 @@ export class AlbumsComponent {
     public albumsService: AlbumsService,
     public router: Router
   ){}
+  
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -48,8 +49,8 @@ export class AlbumsComponent {
       .map(response => response.json())
       .subscribe(response => {
         this.artist = response;
-        this.gotArtist;
-      })
+        this.gotArtist = true;
+      },)
   }
 
   goToAlbum(id: string) {
